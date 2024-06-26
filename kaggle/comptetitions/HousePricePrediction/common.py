@@ -3,7 +3,7 @@ import sys
 repo_root_path = str(os.path.abspath('')).replace('/kaggle/comptetitions/HousePricePrediction', '')
 # print(os.path.abspath(''), os.path.abspath(repo_root_path))
 sys.path.append(os.path.abspath(repo_root_path))
-from internal.feature_engineering import *
+from internal.feature.feature_engineering import *
 
 feature_set = FeatureSet()
 # 0: 连续数值, 1: 离散数值
