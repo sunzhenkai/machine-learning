@@ -20,8 +20,8 @@ class LinearRegression(nn.Module):
         return self.linear(x)
 
     def run(self):
-        x_data = torch.from_numpy(self.data_manager.train_x.values)
-        y_data = torch.from_numpy(self.data_manager.train_y.values)
+        x_data = torch.from_numpy(self.data_manager.train_x.values).float()
+        y_data = torch.from_numpy(self.data_manager.train_y.values).float()
         for i in range(self.epoch):
             y_pred = self.forward(x_data)
             # 计算损失
@@ -31,3 +31,7 @@ class LinearRegression(nn.Module):
             loss.backward()
             # 更新参数
             self.optimizer.step()
+
+    def predict(self):
+        x_test = torch.from_numpy(self.data_manager.test_x.values).float()
+        return self.forward(x_test)

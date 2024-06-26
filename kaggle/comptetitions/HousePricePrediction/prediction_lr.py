@@ -15,8 +15,10 @@ def load():
 
 
 def paddle_lr():
-    lr = LinearRegression(dm)
+    lr = LinearRegression(dm, epoch=3000)
     lr.run()
+    r = lr.predict()
+    print(r)
 
 
 if __name__ == '__main__':
