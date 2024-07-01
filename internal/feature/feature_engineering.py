@@ -1,4 +1,4 @@
-from sklearn.model_selection import train_test_split
+import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from enum import Enum
 
@@ -62,30 +62,30 @@ class FeatureSet:
         return FeatureSet(list(filter(lambda x: x.type not in args, self.features)))
 
 
-def convert_to_str_df(df):
-    for c in df.columns:
-        df[c] = df[c].astype(str)
-    label_encoder = LabelEncoder()
-    for c in df.columns:
-        df[c] = label_encoder.fit_transform(df[c])
-
-
 class DataManager:
-    def __init__(self, feature_set_: FeatureSet, train_df_, test_df_, test_size=0.3, radom_state=10):
-        self.feature_set = feature_set_
-        self.origin_train_x = train_df_
-        self.origin_test_df = test_df_
+    def __init__(self, feature_set: FeatureSet, train_df: pd.DataFrame, feature_encoder=None, *args, **kwargs):
+        self.feature_set: FeatureSet = feature_set
+        self.origin_train_x: pd.DataFrame = train_df
+        if feature_encoder is None:
+            self.feature_encoder = LabelEncoder()
 
         self.label_feature_set = self.feature_set.get_features_by_types(FeatureType.LABEL)
         self.input_feature_set = self.feature_set.get_features_without_types(FeatureType.LABEL, FeatureType.ID)
 
-        self.train_x = train_df_.loc[:, self.input_feature_set.feature_names()]
-        self.train_y = train_df_[self.label_feature_set.features[0].name].to_frame()
-        self.test_x = test_df_.loc[:, self.input_feature_set.feature_names()]
+        self.train_x: pd.DataFrame = self.origin_train_x.loc[:, self.input_feature_set.feature_names()]
+        self.train_y: pd.DataFrame = self.origin_train_x[self.label_feature_set.features[0].name].to_frame()
+        self.train_x_encoded = pd.DataFrame()
+        self._encode(self.train_x_encoded, self.train_x)
 
-        convert_to_str_df(self.train_x)
-        convert_to_str_df(self.test_x)
+        self.shape = self.train_x.shape[1:]
+        print('Shape:', self.shape, ', Rows:', self.train_x.shape[0])
 
-        #self.train_x, self.test_x, self.train_y, self.test_y = train_test_split(features_df_, label_df_,
-        #                                                                        test_size=test_size,
-        #                                                                        random_state=radom_state)
+    def _encode(self, to_df: pd.DataFrame, from_df: pd.DataFrame):
+        for c in from_df.columns:
+            to_df[c] = self.feature_encoder.fit_transform(from_df[c])
+
+    def format_input(self, df: pd.DataFrame):
+        result = pd.DataFrame()
+        selected = df.loc[:, self.input_feature_set.feature_names()]
+        self._encode(result, selected)
+        return result

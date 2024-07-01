@@ -17,4 +17,4 @@ feature_set_v1 = feature_set.get_features_by_types(FeatureType.IDENTITY_ORDERED,
                                                    FeatureType.VALUE_DISCRETE, FeatureType.LABEL)
 # print('v1 features:', feature_set_v1.feature_names())
 
-dm = DataManager(feature_set_v1, train_df, test_df)
+dm = DataManager(feature_set_v1, train_df)

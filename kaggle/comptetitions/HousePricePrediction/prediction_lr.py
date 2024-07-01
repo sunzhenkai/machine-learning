@@ -6,20 +6,21 @@ repo_root_path = str(os.path.abspath('')).replace('/kaggle/comptetitions/HousePr
 sys.path.append(os.path.abspath(repo_root_path))  # 工程根目录
 sys.path.append(os.path.abspath(os.path.abspath('')))  # 当前文件目录
 from internal.feature.feature_engineering import *
-from internal.models.pytorch.pytorch_linear_regression import LinearRegression
-from feature_engineering_v1 import dm
+from internal.models.tensorflow.tensorflow_linear_regression import TensorflowLinearRegression
+from feature_engineering_v1 import dm, train_df
 
 
 def load():
     pass
 
 
-def paddle_lr():
-    lr = LinearRegression(dm, epoch=3000)
+def linear_regression_predict():
+    lr = TensorflowLinearRegression(dm, epochs=10)
     lr.run()
-    r = lr.predict()
-    print(r)
+    pred_y = lr.predict(dm.format_input(train_df))
+    print(pred_y)
 
 
 if __name__ == '__main__':
-    paddle_lr()
+    linear_regression_predict()
+    # pass
