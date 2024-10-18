@@ -1,12 +1,16 @@
+"""
+房价预测基础数据
+"""
 import os
 import sys
+# 添加 root 目录到 path
 repo_root_path = str(os.path.abspath('')).replace('/kaggle/comptetitions/HousePricePrediction', '')
-# print(os.path.abspath(''), os.path.abspath(repo_root_path))
 sys.path.append(os.path.abspath(repo_root_path))
+# 导入特征工程工具库
 from internal.feature.feature_engineering import *
 
+# 定义特征列表，包含特征名和类型
 feature_set = FeatureSet()
-# 0: 连续数值, 1: 离散数值
 feature_set.features = [
     Feature('Id', FeatureType.ID),
     Feature('MSSubClass', FeatureType.IDENTITY_UNORDERED),
@@ -91,5 +95,6 @@ feature_set.features = [
     Feature('SalePrice', FeatureType.LABEL)
 ]
 
+# 对特征列表做基础的校验（重复特征等）
 print(feature_set.check())
 # print(feature_set.get_features_by_types(FeatureType.IDENTITY_ORDERED, FeatureType.IDENTITY_UNORDERED))

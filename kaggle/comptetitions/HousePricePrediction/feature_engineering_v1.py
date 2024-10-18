@@ -10,8 +10,8 @@ sys.path.append(script_path)
 from common import *
 import pandas as pd
 
-train_df = pd.read_csv(f'{script_path}/data/train_df_v1.csv')
-test_df = pd.read_csv(f'{script_path}/data/test_df_v1.csv')
+train_df = pd.read_csv(f'{script_path}/data/tmp/train_df_v1.csv')
+test_df = pd.read_csv(f'{script_path}/data/tmp/test_df_v1.csv')
 
 feature_set_v1 = feature_set.get_features_by_types(FeatureType.IDENTITY_ORDERED, FeatureType.IDENTITY_UNORDERED,
                                                    FeatureType.VALUE_DISCRETE, FeatureType.LABEL)
