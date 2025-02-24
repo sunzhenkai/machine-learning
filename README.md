@@ -1,2 +1,8 @@
-# 简介
-机器学习 & 深度学习
+# Install Deps
+```shell
+pip install jupyterlab
+```
+# Run
+```shell
+make lab
+```
