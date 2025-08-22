@@ -1,0 +1,52 @@
+# 基础工具
+numpy
+scipy
+pandas
+scikit-learn
+joblib
+
+# 可视化
+matplotlib
+seaborn
+plotly
+ipywidgets
+
+# 机器学习 / 推荐系统
+lightgbm
+xgboost
+catboost
+implicit
+
+# 深度学习 (根据需求二选一或都装)
+torch
+torchvision
+torchaudio
+tensorflow
+keras
+
+# NLP / Embedding
+transformers
+sentence-transformers
+nltk
+spacy
+
+# 数据处理/特征工程
+tqdm
+scikit-optimize
+optuna
+category-encoders
+featuretools
+
+# 数据表/大规模数据
+polars
+pyarrow
+dask[complete]
+
+# 模型解释 & 可解释AI
+shap
+lime
+
+# 工具类
+pydantic
+hydra-core
+python-dotenv
