@@ -1,0 +1,6 @@
+[submodule "3rd/py-common"]
+	path = 3rd/py-common
+	url = git@github.com:sunzhenkai/py-common.git
+[submodule "3rd/py-ml-common"]
+	path = 3rd/py-ml-common
+	url = git@github.com:sunzhenkai/py-ml-common.git
